@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sample_app/data/post.dart';
+import 'package:sample_app/data/models/post/post.dart';
 import 'package:sample_app/ui/post_viewmodel.dart';
 
 

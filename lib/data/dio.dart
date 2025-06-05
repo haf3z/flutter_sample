@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:sample_app/data/post.dart';
+import 'package:sample_app/data/models/post/post.dart';
 
 Dio getDio() {
   final dio = Dio();
