@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:sample_app/data/models/post/post.dart';
+import 'package:sample_app/ui/home_page.dart';
 import 'package:sample_app/ui/post_viewmodel.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key, required this.viewmodel});
-  final PostViewmodel viewmodel;
+class PostScreen extends StatelessWidget {
+  const PostScreen({super.key, required this.viewModel});
+  final PostViewmodel viewModel;
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: ListenableBuilder(
-        listenable: viewmodel,
+        listenable: viewModel,
         builder: (context, _) {
-          if (viewmodel.postList.isEmpty) {
-            return const CircularProgressIndicator();
+          if (viewModel.post != null) {
+            return PostItem(viewModel.post!);
           } else {
-            return PostList(viewmodel.postList);
+            return const CircularProgressIndicator();
           }
         },
       ),
@@ -23,23 +24,8 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class PostList extends StatelessWidget {
-  const PostList(this.postList, {super.key});
-  final List<Post> postList;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: postList.length,
-      itemBuilder: (context, index) {
-        return PostItem(postList[index]);
-      },
-    );
-  }
-}
-
-class PostItem extends StatelessWidget {
-  const PostItem(this.item, {super.key});
+class PostDetails extends StatelessWidget {
+  const PostDetails(this.item, {super.key});
 
   final Post item;
 
@@ -54,7 +40,7 @@ class PostItem extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(item.title, style: style, maxLines: 1),
+              Text(item.title, style: style),
               Text(item.body),
             ],
           ),
