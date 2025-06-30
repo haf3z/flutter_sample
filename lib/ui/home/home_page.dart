@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sample_app/data/models/post/post.dart';
+import 'package:sample_app/ui/home/home_view_model.dart';
+import 'package:sample_app/ui/post/post_screen.dart';
 import 'package:sample_app/ui/post_view_model.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key, required this.viewModel});
-  final PostViewModel viewModel;
+  final HomeViewModel viewModel;
 
   @override
   Widget build(BuildContext context) {
@@ -47,19 +50,32 @@ class PostItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final style = theme.textTheme.headlineMedium;
-    return Card(
-      child: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(item.title, style: style, maxLines: 1),
-              Text(item.body),
-            ],
+    return GestureDetector(
+      onTap: () => {
+        Navigator.of(context).push(getPostScreen(context, item.id)),
+      },
+      child: Card(
+        child: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(item.title, style: style, maxLines: 1),
+                Text(item.body),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
+}
+
+MaterialPageRoute getPostScreen(BuildContext context, int id) {
+  return MaterialPageRoute(
+    builder: (context) => PostScreen(
+      viewModel: PostViewModel(postRepository: context.read(), index: id),
+    ),
+  );
 }

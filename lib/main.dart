@@ -4,8 +4,8 @@ import 'package:sample_app/data/api_client.dart';
 import 'package:sample_app/data/dio.dart';
 import 'package:sample_app/data/repositories/post_repository.dart';
 import 'package:sample_app/ui/home/home_page.dart';
+import 'package:sample_app/ui/home/home_view_model.dart';
 import 'package:sample_app/ui/post/post_screen.dart';
-import 'package:sample_app/ui/post_view_model.dart';
 
 void main() {
   runApp(
@@ -30,7 +30,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         body: HomePage(
-          viewModel: PostViewModel(postRepository: context.read()),
+          viewModel: HomeViewModel(postRepository: context.read()),
         ),
       ),
     );
