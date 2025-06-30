@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:sample_app/data/models/post/post.dart';
-import 'package:sample_app/ui/post_viewmodel.dart';
+import 'package:sample_app/ui/post_view_model.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key, required this.viewmodel});
-  final PostViewmodel viewmodel;
+  const HomePage({super.key, required this.viewModel});
+  final PostViewModel viewModel;
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: ListenableBuilder(
-        listenable: viewmodel,
+        listenable: viewModel,
         builder: (context, _) {
-          if (viewmodel.postList.isEmpty) {
+          if (viewModel.postList.isEmpty) {
             return const CircularProgressIndicator();
           } else {
-            return PostList(viewmodel.postList);
+            return PostList(viewModel.postList);
           }
         },
       ),

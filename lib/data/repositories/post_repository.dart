@@ -11,8 +11,8 @@ class PostRepository {
     return result;
   }
 
-  Future<Result<Post>> getPost() async {
-    final result = await _apiClient.getPost(2);
+  Future<Result<Post>> getPost(int index) async {
+    final result = await _apiClient.getPost(index);
     return result;
   }
 }

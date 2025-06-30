@@ -3,8 +3,8 @@ import 'package:sample_app/data/models/post/post.dart';
 import 'package:sample_app/data/repositories/post_repository.dart';
 import 'package:sample_app/utils/results.dart';
 
-class PostViewmodel extends ChangeNotifier {
-  PostViewmodel({required PostRepository postRepository})
+class PostViewModel extends ChangeNotifier {
+  PostViewModel({required PostRepository postRepository})
     : _postRepository = postRepository {
     getPosts();
     getPost();
@@ -30,7 +30,7 @@ class PostViewmodel extends ChangeNotifier {
   }
 
   Future<void> getPost() async {
-    final result = await _postRepository.getPost();
+    final result = await _postRepository.getPost(1);
     switch (result) {
       case Ok():
         {
