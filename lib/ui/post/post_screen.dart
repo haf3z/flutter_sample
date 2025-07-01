@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sample_app/data/models/post/post.dart';
-import 'package:sample_app/ui/home/home_page.dart';
 import 'package:sample_app/ui/post_view_model.dart';
 
 class PostScreen extends StatelessWidget {
@@ -9,17 +8,15 @@ class PostScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ListenableBuilder(
-        listenable: viewModel,
-        builder: (context, _) {
-          if (viewModel.post != null) {
-            return PostItem(viewModel.post!);
-          } else {
-            return const CircularProgressIndicator();
-          }
-        },
-      ),
+    return ListenableBuilder(
+      listenable: viewModel,
+      builder: (context, _) {
+        return Center(
+          child: (viewModel.post != null)
+              ? PostDetails(viewModel.post!)
+              : const CircularProgressIndicator(),
+        );
+      },
     );
   }
 }
@@ -33,16 +30,19 @@ class PostDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final style = theme.textTheme.headlineMedium;
-    return Card(
-      child: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(item.title, style: style),
-              Text(item.body),
-            ],
+    return Scaffold(
+      appBar: AppBar(title: Text(item.title)),
+      body: Card(
+        child: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(item.title, style: style),
+                Text(item.body),
+              ],
+            ),
           ),
         ),
       ),

@@ -1,26 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_app/data/models/post/post.dart';
+import 'package:sample_app/routing/routes.dart';
 import 'package:sample_app/ui/home/home_view_model.dart';
 import 'package:sample_app/ui/post/post_screen.dart';
 import 'package:sample_app/ui/post_view_model.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key, required this.viewModel});
+
   final HomeViewModel viewModel;
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ListenableBuilder(
-        listenable: viewModel,
-        builder: (context, _) {
-          if (viewModel.postList.isEmpty) {
-            return const CircularProgressIndicator();
-          } else {
-            return PostList(viewModel.postList);
-          }
-        },
+    return Scaffold(
+      body: Center(
+        child: ListenableBuilder(
+          listenable: viewModel,
+          builder: (context, _) {
+            if (viewModel.postList.isEmpty) {
+              return const CircularProgressIndicator();
+            } else {
+              return PostList(viewModel.postList);
+            }
+          },
+        ),
       ),
     );
   }
@@ -28,6 +33,7 @@ class HomePage extends StatelessWidget {
 
 class PostList extends StatelessWidget {
   const PostList(this.postList, {super.key});
+
   final List<Post> postList;
 
   @override
@@ -51,9 +57,7 @@ class PostItem extends StatelessWidget {
     final theme = Theme.of(context);
     final style = theme.textTheme.headlineMedium;
     return GestureDetector(
-      onTap: () => {
-        Navigator.of(context).push(getPostScreen(context, item.id)),
-      },
+      onTap: () => context.go(Routes.postWithId(item.id)),
       child: Card(
         child: Padding(
           padding: EdgeInsets.all(8.0),
