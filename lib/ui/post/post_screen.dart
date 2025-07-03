@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sample_app/data/models/post/post.dart';
-import 'package:sample_app/ui/post_view_model.dart';
+import 'package:sample_app/ui/post/post_view_model.dart';
 
 class PostScreen extends StatelessWidget {
   const PostScreen({super.key, required this.viewModel});

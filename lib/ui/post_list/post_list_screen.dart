@@ -3,18 +3,19 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_app/data/models/post/post.dart';
 import 'package:sample_app/routing/routes.dart';
-import 'package:sample_app/ui/home/home_view_model.dart';
 import 'package:sample_app/ui/post/post_screen.dart';
-import 'package:sample_app/ui/post_view_model.dart';
+import 'package:sample_app/ui/post/post_view_model.dart';
+import 'package:sample_app/ui/post_list/home_view_model.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key, required this.viewModel});
+class PostListScreen extends StatelessWidget {
+  const PostListScreen({super.key, required this.viewModel});
 
   final HomeViewModel viewModel;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: const Text("Posts")),
       body: Center(
         child: ListenableBuilder(
           listenable: viewModel,

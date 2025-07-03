@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:sample_app/data/models/album/album.dart';
 import 'package:sample_app/data/models/post/post.dart';
 import 'package:sample_app/utils/results.dart';
 
@@ -38,5 +39,20 @@ class ApiClient {
       return Result.error(error);
     }
   }
-}
 
+  Future<Result<List<Album>>> getAlbumList() async {
+    try {
+      final response = await _dio.get("/albums");
+      if (response.statusCode == 200) {
+        final List<Album> list = (response.data as List)
+            .map((element) => Album.fromJson(element))
+            .toList();
+        return Result.ok(list);
+      } else {
+        return const Result.error(HttpException("Invalid response"));
+      }
+    } on Exception catch (error) {
+      return Result.error(error);
+    }
+  }
+}
