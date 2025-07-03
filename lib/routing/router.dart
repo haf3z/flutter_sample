@@ -12,11 +12,19 @@ import 'package:sample_app/ui/post/post_view_model.dart';
 
 GoRouter router() => GoRouter(initialLocation: Routes.home, routes: [_home1]);
 
-final _home1 = ShellRoute(
-  builder: (BuildContext context, GoRouterState state, Widget child) {
-    return HomeScreen(child: child);
-  },
-  routes: [_home, _album],
+final _home1 = StatefulShellRoute.indexedStack(
+  builder:
+      (
+        BuildContext context,
+        GoRouterState state,
+        StatefulNavigationShell navigationShell,
+      ) {
+        return HomeScreen(navigationShell: navigationShell);
+      },
+  branches: [
+    StatefulShellBranch(routes: [_home]),
+    StatefulShellBranch(routes: [_album]),
+  ],
 );
 
 GoRoute _home = GoRoute(

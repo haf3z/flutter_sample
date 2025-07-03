@@ -19,18 +19,16 @@ class MainApp extends StatelessWidget {
 }
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key, required this.child});
-  final Widget child;
+  const HomeScreen({super.key, required this.navigationShell});
+  final StatefulNavigationShell navigationShell;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: child,
+      body: navigationShell,
       bottomNavigationBar: NavigationBar(
-        onDestinationSelected: (int index) {
-          _onItemTapped(index, context);
-        },
-        selectedIndex: _calculateSelectedIndex(context),
+        onDestinationSelected: (int index) => navigationShell.goBranch(index),
+        selectedIndex: navigationShell.currentIndex,
         destinations: [
           NavigationDestination(icon: Icon(Icons.home_outlined), label: "Home"),
           NavigationDestination(
