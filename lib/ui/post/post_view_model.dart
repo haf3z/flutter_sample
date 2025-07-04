@@ -22,6 +22,7 @@ class PostViewModel extends ChangeNotifier {
       case Ok():
         {
           _post = result.value;
+          isSaved = _post!.isSaved;
         }
       case Error():
         {}
@@ -30,8 +31,12 @@ class PostViewModel extends ChangeNotifier {
   }
 
   void toggleSave() {
-    _postRepository.savePost(_post!);
     isSaved = !isSaved;
+    if (isSaved) {
+      _postRepository.savePost(_post!);
+    } else {
+      _postRepository.deletePost(post!.id);
+    }
     notifyListeners();
   }
 }

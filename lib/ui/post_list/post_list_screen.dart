@@ -62,11 +62,14 @@ class PostItem extends StatelessWidget {
       child: Card(
         child: Padding(
           padding: EdgeInsets.all(8.0),
-          child: Center(
+          child: Padding(
+            padding: EdgeInsets.all(16.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(item.title, style: style, maxLines: 1),
+                Text("${item.id}. ${item.title}", style: style, maxLines: 1),
+                SizedBox(height: 8.0),
                 Text(item.body),
               ],
             ),

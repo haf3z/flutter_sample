@@ -29,4 +29,9 @@ class DBService {
       return null;
     }
   }
+
+  Future<void> deletePost(int id) async {
+    final db = await _appDb.database;
+    await db.delete(_postDB, where: 'id = ?', whereArgs: [id]);
+  }
 }

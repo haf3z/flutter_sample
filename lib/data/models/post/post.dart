@@ -9,6 +9,7 @@ class Post {
   int id;
   String title;
   String body;
+  bool isSaved = false;
 
   factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
 
