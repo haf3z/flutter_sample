@@ -14,6 +14,7 @@ class PostViewModel extends ChangeNotifier {
 
   Post? _post;
   Post? get post => _post;
+  bool isSaved = false;
 
   Future<void> getPost() async {
     final result = await _postRepository.getPost(_index);
@@ -25,6 +26,12 @@ class PostViewModel extends ChangeNotifier {
       case Error():
         {}
     }
+    notifyListeners();
+  }
+
+  void toggleSave() {
+    _postRepository.savePost(_post!);
+    isSaved = !isSaved;
     notifyListeners();
   }
 }

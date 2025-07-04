@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:sample_app/main.dart';
 import 'package:sample_app/routing/routes.dart';
 import 'package:sample_app/ui/album/album_screen.dart';
 import 'package:sample_app/ui/album/album_view_model.dart';
+import 'package:sample_app/ui/home/home_screen.dart';
 import 'package:sample_app/ui/post_list/post_list_screen.dart';
 import 'package:sample_app/ui/post_list/home_view_model.dart';
 import 'package:sample_app/ui/post/post_screen.dart';
 import 'package:sample_app/ui/post/post_view_model.dart';
 
-GoRouter router() => GoRouter(initialLocation: Routes.home, routes: [_home1]);
+GoRouter router() => GoRouter(initialLocation: Routes.home, routes: [root]);
 
-final _home1 = StatefulShellRoute.indexedStack(
+final root = StatefulShellRoute.indexedStack(
   builder:
       (
         BuildContext context,
