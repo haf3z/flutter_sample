@@ -18,9 +18,12 @@ class Post {
     return {'id': id, 'userId': userId, 'title': title, 'body': body};
   }
 
+  factory Post.fromMap(Map<String, dynamic> map) {
+    return Post(map['userId'], map['id'], map['title'], map['body']);
+  }
+
   @override
   String toString() {
     return 'Post{id: $id, title: $title, body: $body}';
   }
 }
-

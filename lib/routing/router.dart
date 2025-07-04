@@ -6,11 +6,15 @@ import 'package:sample_app/ui/album/album_screen.dart';
 import 'package:sample_app/ui/album/album_view_model.dart';
 import 'package:sample_app/ui/home/home_screen.dart';
 import 'package:sample_app/ui/post_list/post_list_screen.dart';
-import 'package:sample_app/ui/post_list/home_view_model.dart';
 import 'package:sample_app/ui/post/post_screen.dart';
 import 'package:sample_app/ui/post/post_view_model.dart';
 
-GoRouter router() => GoRouter(initialLocation: Routes.home, routes: [root]);
+final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
+GoRouter router() => GoRouter(
+  navigatorKey: _rootNavigatorKey,
+  initialLocation: Routes.home,
+  routes: [root],
+);
 
 final root = StatefulShellRoute.indexedStack(
   builder:
@@ -30,9 +34,7 @@ final root = StatefulShellRoute.indexedStack(
 GoRoute _home = GoRoute(
   path: Routes.home,
   builder: (context, state) {
-    return PostListScreen(
-      viewModel: HomeViewModel(postRepository: context.read()),
-    );
+    return PostListScreen(viewModel: context.read());
   },
   routes: [_post],
 );

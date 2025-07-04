@@ -1,6 +1,6 @@
 import 'package:sample_app/data/api_client.dart';
 import 'package:sample_app/data/models/post/post.dart';
-import 'package:sample_app/data/perisistence/database.dart';
+import 'package:sample_app/data/perisistence/db_service.dart';
 import 'package:sample_app/utils/results.dart';
 
 class PostRepository {
@@ -16,6 +16,8 @@ class PostRepository {
   }
 
   Future<Result<Post>> getPost(int index) async {
+    final post = await _dbService.getPost(index);
+    if (post != null) return Result.ok(post);
     final result = await _apiClient.getPost(index);
     return result;
   }
