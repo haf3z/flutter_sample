@@ -30,6 +30,12 @@ class DBService {
     }
   }
 
+  Future<List<Post>> getAllPost() async {
+    final db = await _appDb.database;
+    var list = await db.query(_postDB);
+    return list.map((e) => Post.fromMap(e)).toList();
+  }
+
   Future<void> deletePost(int id) async {
     final db = await _appDb.database;
     await db.delete(_postDB, where: 'id = ?', whereArgs: [id]);

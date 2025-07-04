@@ -8,6 +8,8 @@ import 'package:sample_app/ui/home/home_screen.dart';
 import 'package:sample_app/ui/post_list/post_list_screen.dart';
 import 'package:sample_app/ui/post/post_screen.dart';
 import 'package:sample_app/ui/post/post_view_model.dart';
+import 'package:sample_app/ui/saved_post/saved_post_screen.dart';
+import 'package:sample_app/ui/saved_post/saved_post_view_model.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 GoRouter router() => GoRouter(
@@ -28,6 +30,7 @@ final root = StatefulShellRoute.indexedStack(
   branches: [
     StatefulShellBranch(routes: [_home]),
     StatefulShellBranch(routes: [_album]),
+    StatefulShellBranch(routes: [_savedPosts]),
   ],
 );
 
@@ -55,4 +58,14 @@ GoRoute _album = GoRoute(
       viewModel: AlbumViewModel(albumRepository: context.read()),
     );
   },
+);
+
+GoRoute _savedPosts = GoRoute(
+  path: Routes.savedPosts,
+  builder: (context, state) {
+    return SavedPostScreen(
+      viewModel: SavedPostViewModel(postRepository: context.read()),
+    );
+  },
+  routes: [_post],
 );

@@ -13,10 +13,20 @@ class HomeScreen extends StatelessWidget {
         onDestinationSelected: (int index) => navigationShell.goBranch(index),
         selectedIndex: navigationShell.currentIndex,
         destinations: [
-          NavigationDestination(icon: Icon(Icons.home_outlined), label: "Home"),
+          NavigationDestination(
+            icon: Icon(Icons.home_outlined),
+            selectedIcon: Icon(Icons.home),
+            label: "Home",
+          ),
           NavigationDestination(
             icon: Icon(Icons.album_outlined),
+            selectedIcon: Icon(Icons.album),
             label: "Album",
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.save_outlined),
+            selectedIcon: Icon(Icons.save),
+            label: "Saved",
           ),
         ],
       ),

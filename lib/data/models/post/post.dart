@@ -20,7 +20,9 @@ class Post {
   }
 
   factory Post.fromMap(Map<String, dynamic> map) {
-    return Post(map['userId'], map['id'], map['title'], map['body']);
+    Post post = Post(map['userId'], map['id'], map['title'], map['body']);
+    post.isSaved = true;
+    return post;
   }
 
   @override

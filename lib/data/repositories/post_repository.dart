@@ -18,7 +18,6 @@ class PostRepository {
   Future<Result<Post>> getPost(int index) async {
     final post = await _dbService.getPost(index);
     if (post != null) {
-      post.isSaved = true;
       return Result.ok(post);
     }
     final result = await _apiClient.getPost(index);
@@ -31,5 +30,9 @@ class PostRepository {
 
   Future<void> deletePost(int id) async {
     _dbService.deletePost(id);
+  }
+
+  Future<List<Post>> getSavedPosts() async {
+    return _dbService.getAllPost();
   }
 }
